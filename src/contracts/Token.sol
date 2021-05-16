@@ -18,7 +18,7 @@ contract Token is ERC20 {
   //Add pass minter role function
   function passMinterRole(address dBank) public returns (bool) {
     require(msg.sender==minter, "Error, only owner can change pass minter role");
-    minter == dBank;
+    minter = dBank;
 
     emit MinterChanged(msg.sender, dBank);
     return true;
