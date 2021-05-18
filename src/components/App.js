@@ -8,7 +8,7 @@ import "./App.css";
 
 //h0m3w0rk - add new tab to check accrued interest
 // more advance error handeling in loadBlockchainData()
-// users can't deposit more than once. must deposit => withdraw
+
 
 class App extends Component {
   async componentWillMount() {
