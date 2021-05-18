@@ -8,7 +8,7 @@ import "./App.css";
 
 //h0m3w0rk - add new tab to check accrued interest
 // more advance error handeling in loadBlockchainData()
-// users cant deposit more than once. must deposit => withdraw
+// users can't deposit more than once. must deposit => withdraw
 
 class App extends Component {
   async componentWillMount() {
@@ -66,10 +66,10 @@ class App extends Component {
     //in try block call dBank deposit();
     if (this.state.dbank !== "undefined") {
       try {
-        console.log(this.state.account);
         await this.state.dbank.methods
           .deposit()
           .send({ value: amount, from: this.state.account });
+        this.setState({ depositCheck: false });
       } catch (e) {
         console.log("Error, deposit: " + e);
       }
@@ -86,6 +86,7 @@ class App extends Component {
         await this.state.dbank.methods
           .withdraw()
           .send({ from: this.state.account });
+        this.setState({ depositCheck: true })
       } catch (e) {
         console.log("Error, deposit: " + e);
       }
@@ -101,6 +102,7 @@ class App extends Component {
       dbank: null,
       balance: 0,
       dBankAddress: null,
+      depositCheck: true,
     };
   }
 
@@ -163,7 +165,7 @@ class App extends Component {
                       </form>
                     </div>
                   </Tab>
-                  <Tab eventKey="withdraw" title="Withdraw">
+                  <Tab eventKey="withdraw" title="Withdraw" disabled={this.state.depositCheck}>
                     <div>
                       <br></br>
                       Do you want to withdraw + take interest?
